@@ -1,36 +1,13 @@
 "use server";
 
+
 import Post from "@/models/Post";
-import Comment from "@/models/Comment";
 
-// CREATE: Einen neuen Blog-Post erstellen
-
-import { getSessionUser } from "@/lib/auth";
-
-export async function createPost({
-  title,
-  content,
-  imageUrl,
-}: {
-  title: string;
-  content: string;
-  imageUrl?: string;
-}) {
-  const user = await getSessionUser();
-  if (!user) throw new Error("Nicht eingeloggt.");
-  const author = user._id;
-
-  if (!title || !content) {
-    throw new Error("Titel und Inhalt sind erforderlich.");
-  }
-
-  try {
-    const post = new Post({ title, content, author, imageUrl });
-    await post.save();
-    return post;
-  } catch (error) {
-    throw new Error("Post konnte nicht erstellt werden.");
-  }
+export async function createPost({ title, content, author }: { title: string; content: string; author?: string }) {
+	
+	const post = new Post({ title, content, author });
+	await post.save();
+	return post;
 }
 
 // READ (alle): Alle Blog-Posts abrufen
