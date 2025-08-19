@@ -5,17 +5,21 @@ import Comment from "@/models/Comment";
 
 // CREATE: Einen neuen Blog-Post erstellen
 
+import { getSessionUser } from "@/lib/auth";
+
 export async function createPost({
   title,
   content,
-  author,
   imageUrl,
 }: {
   title: string;
   content: string;
-  author?: string;
   imageUrl?: string;
 }) {
+  const user = await getSessionUser();
+  if (!user) throw new Error("Nicht eingeloggt.");
+  const author = user._id;
+
   if (!title || !content) {
     throw new Error("Titel und Inhalt sind erforderlich.");
   }
@@ -43,12 +47,10 @@ export async function getPosts() {
 // READ (einzelner): Einen Blog-Post anhand der ID abrufen
 
 export async function getPostById(id: string) {
-  if (!id) {
-    throw new Error("Post-ID ist erforderlich.");
-  }
-
   try {
-    const post = await Post.findById(id).lean();
+    const post = await Post.findById(id)
+      .populate("author", "username") // Username mitladen!
+      .lean();
     if (!post) throw new Error("Post nicht gefunden.");
     return post;
   } catch (error) {
