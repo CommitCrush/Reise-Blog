@@ -29,8 +29,17 @@ export default function LoginPage() {
             required
           />
         </div>
-        <button type="submit">send</button>
-        <Link href="/register">Register</Link>
+        <button
+          type="submit"
+        >
+          send
+        </button>
+        <p className="text-center">
+          Ich habe kein Acount ?
+          <Link href="/register">
+            Register
+          </Link>
+        </p>
       </form>
     </main>
   );
