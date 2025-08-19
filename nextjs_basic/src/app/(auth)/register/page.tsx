@@ -52,13 +52,13 @@ export default function RegisterPage() {
         </div>
         <button
           type="submit"
-          className="font-mediummt  text-white w-full rounded border-gray-300 shadow-sm bg-blue-600 p-2"
+          className="font-medium text-white w-full rounded border-gray-300 shadow-sm bg-Sky-300 p-2"
         >
           send
         </button>
         <p className="text-center">
           Hast du bereit dein Acount ?
-          <Link href="/login" className="text-blue-600 hover: underline">
+          <Link href="/login" className="text-Sky-300 hover: underline">
             Login
           </Link>
         </p>
