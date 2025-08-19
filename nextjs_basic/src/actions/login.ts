@@ -41,5 +41,5 @@ export async function LoginUser(formData: FormData): Promise<void> {
     maxAge: 60 * 60 * 24, // 1 Tag
   });
 
-  redirect("/dashboard");
+  redirect("/");
 }
