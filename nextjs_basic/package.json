@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/postcss": "^4.1.12",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.21",
     "bcrypt": "^6.0.0",
