@@ -34,3 +34,52 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Project Roadmap
+
+### 1. Project Structure
+- **Closed**
+    - Add basic frontend structure (`app/`, `_components/`)
+    - Add basic backend structure (`lib/`, `models/`, `actions/`)
+    - Setup TypeScript & Next.js config
+
+### 2. Authentication (Register & Login)
+- **Open**
+    - Implement `registerUser` action with password hashing (bcrypt)
+    - Implement `loginUser` action with JWT & cookies
+    - Add `logoutUser` action
+    - Create pages: `/register` & `/login` with forms
+
+### 3. Blog CRUD (Create, Read, Update, Delete)
+- **Open**
+    - `createPost` action → Blog erstellen
+    - `getPosts` action → Alle Blogs holen
+    - `getPost` action → Blog Detailseite
+    - Update/Delete Funktionen einbauen
+    - Add pages: `/blog/create`, `/blog/[id]`, `/blog/[id]/edit`
+
+### 4. Comments & Likes
+- **Open**
+    - `addComment` action → Kommentare speichern
+    - `toggleLike` action → Like/Unlike Blogs
+    - Create `CommentBox` component
+    - Display likes & comments in `PostCard` and `blog/[id]`
+
+### 5. Layout & Navigation
+- **Open**
+    - Add Navbar with links to Home, Create Blog, Profile
+    - Add `LogoutButton`
+    - Add Footer
+    - Implement global `layout.tsx`
+
+### 6. Profile Page
+- **Open**
+    - Implement `/profile` page
+    - Show all posts of the logged-in user
+    - Option to edit/delete own posts
+
+### 7. Image Upload
+- **Open**
+    - Integrate Cloudinary for image uploads
+    - Add image upload field in `createPost` & `editPost` forms
+    - Display uploaded image in `PostCard` and blog detail page
