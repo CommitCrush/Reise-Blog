@@ -5,6 +5,7 @@ export interface IPost extends Document {
 	content: string;
 	author: mongoose.Types.ObjectId;
 	imageUrl?: string;
+	 likes: string[]; // Array von User-IDs, die geliked haben
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -28,6 +29,11 @@ const postSchema = new Schema<IPost>(
         type: String,
         required: false,
     },
+	likes: [
+            {
+                type: String, // User-ID als String
+            },
+        ],
 	},
 	{
 		timestamps: true,
