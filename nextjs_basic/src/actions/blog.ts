@@ -1,6 +1,7 @@
 "use server";
 
 import Post from "@/models/Post";
+import Comment from "@/models/Comment";
 
 // CREATE: Einen neuen Blog-Post erstellen
 
@@ -87,5 +88,57 @@ export async function deletePost(id: string) {
     return deleted;
   } catch (error) {
     throw new Error("Post konnte nicht gelöscht werden.");
+  }
+}
+
+// LIKE/UNLIKE: Like oder Unlike für einen Blog-Post toggeln 
+
+export async function toggleLike(postId: string, userId: string) {
+  if (!postId || !userId) throw new Error("Post-ID und User-ID sind erforderlich.");
+
+  const post = await Post.findById(postId);
+  if (!post) throw new Error("Post nicht gefunden.");
+
+  const index = post.likes.indexOf(userId);
+  if (index > -1) {
+    // User hat schon geliked → Unlike
+    post.likes.splice(index, 1);
+  } else {
+    // User hat noch nicht geliked → Like
+    post.likes.push(userId);
+  }
+  await post.save();
+  return post.likes.length;
+}
+// KOMMENTAR: Kommentar zu einem Blog-Post hinzufügen
+export async function addComment({
+  postId,
+  userId,
+  text,
+}: {
+  postId: string;
+  userId: string;
+  text: string;
+}) {
+  if (!postId || !userId || !text) throw new Error("Alle Felder sind erforderlich.");
+  try {
+    const comment = new Comment({ post: postId, user: userId, text });
+    await comment.save();
+    return comment;
+  } catch (error) {
+    throw new Error("Kommentar konnte nicht gespeichert werden.");
+  }
+}
+// Alle Kommentare zu einem Post abrufen
+export async function getComments(postId: string) {
+  if (!postId) throw new Error("Post-ID ist erforderlich.");
+  try {
+    const comments = await Comment.find({ post: postId })
+      .sort({ createdAt: -1 })
+      .populate("user", "username") // Username mitliefern!
+      .lean();
+    return comments;
+  } catch (error) {
+    throw new Error("Kommentare konnten nicht geladen werden.");
   }
 }
