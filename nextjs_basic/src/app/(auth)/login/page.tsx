@@ -29,6 +29,7 @@ export default function LoginPage() {
             required
           />
         </div>
+<<<<<<< HEAD
         <button
           type="submit"
         >
@@ -40,6 +41,10 @@ export default function LoginPage() {
             Register
           </Link>
         </p>
+=======
+        <button type="submit">send</button>
+        <Link href="/register">Register</Link>
+>>>>>>> a864c65 (feat: implement login page with email and password fields)
       </form>
     </main>
   );
