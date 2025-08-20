@@ -93,6 +93,7 @@ export async function deletePost(id: string) {
   }
 }
 
+
 // LIKE/UNLIKE: Like oder Unlike für einen Blog-Post toggeln 
 
 export async function toggleLike(postId: string, userId: string) {
