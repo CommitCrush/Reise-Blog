@@ -44,7 +44,7 @@ export default function CreateBlogPage() {
       setImageFile(null);
       setPreview(null);
       alert("Post erstellt!");
-    } catch (error) {
+    } catch {
       alert("Fehler beim Erstellen des Posts.");
     }
     setLoading(false);
