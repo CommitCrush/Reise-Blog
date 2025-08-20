@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getComments } from "@/actions/blog";
 import CommentBox from "./CommentBox";
 
 interface CommentsSectionProps {
@@ -14,7 +13,8 @@ export default function CommentsSection({ postId, userId }: CommentsSectionProps
 
   const loadComments = async () => {
     setLoading(true);
-    const data = await getComments(postId);
+    const res = await fetch(`/api/comments?postId=${postId}`);
+    const data = await res.json();
     setComments(data);
     setLoading(false);
   };

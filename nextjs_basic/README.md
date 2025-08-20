@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+To start developing locally, run the development server:
 
 ```bash
 npm run dev
@@ -14,72 +14,79 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can edit the main page by modifying `app/page.tsx`. The page will auto-update as you save changes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) for automatic font optimization and loads [Geist](https://vercel.com/font), a modern font family by Vercel.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Explore these resources to learn more about Next.js:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs) – Features and API reference.
+- [Learn Next.js](https://nextjs.org/learn) – Interactive tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+You can also visit the [Next.js GitHub repository](https://github.com/vercel/next.js) to contribute or give feedback.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is via the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Project Roadmap
 
 ### 1. Project Structure
 - **Closed**
-    - Add basic frontend structure (`app/`, `_components/`)
-    - Add basic backend structure (`lib/`, `models/`, `actions/`)
-    - Setup TypeScript & Next.js config
+    - Basic frontend structure (`app/`, `_components/`)
+    - Basic backend structure (`lib/`, `models/`, `actions/`)
+    - TypeScript & Next.js configuration
 
 ### 2. Authentication (Register & Login)
 - **Open**
-    - Implement `registerUser` action with password hashing (bcrypt)
-    - Implement `loginUser` action with JWT & cookies
-    - Add `logoutUser` action
-    - Create pages: `/register` & `/login` with forms
+    - `registerUser` action with password hashing (bcrypt)
+    - `loginUser` action with JWT & cookies
+    - `logoutUser` action
+    - Pages: `/register` & `/login` with forms
 
 ### 3. Blog CRUD (Create, Read, Update, Delete)
 - **Open**
-    - `createPost` action → Blog erstellen
-    - `getPosts` action → Alle Blogs holen
-    - `getPost` action → Blog Detailseite
-    - Update/Delete Funktionen einbauen
-    - Add pages: `/blog/create`, `/blog/[id]`, `/blog/[id]/edit`
+    - `createPost` action – Create blog posts
+    - `getPosts` action – Fetch all blogs
+    - `getPost` action – Blog detail page
+    - Update/Delete functionality
+    - Pages: `/blog/create`, `/blog/[id]`, `/blog/[id]/edit`
 
 ### 4. Comments & Likes
 - **Open**
-    - `addComment` action → Kommentare speichern
-    - `toggleLike` action → Like/Unlike Blogs
-    - Create `CommentBox` component
+    - `addComment` action – Save comments
+    - `toggleLike` action – Like/Unlike blogs
+    - `CommentBox` component
     - Display likes & comments in `PostCard` and `blog/[id]`
 
 ### 5. Layout & Navigation
 - **Open**
-    - Add Navbar with links to Home, Create Blog, Profile
-    - Add `LogoutButton`
-    - Add Footer
-    - Implement global `layout.tsx`
+    - Navbar with links to Home, Create Blog, Profile
+    - `LogoutButton`
+    - Footer
+    - Global `layout.tsx`
 
 ### 6. Profile Page
 - **Open**
-    - Implement `/profile` page
-    - Show all posts of the logged-in user
-    - Option to edit/delete own posts
+    - `/profile` page
+    - Show all posts by the logged-in user
+    - Edit/delete own posts
 
 ### 7. Image Upload
 - **Open**
-    - Integrate Cloudinary for image uploads
-    - Add image upload field in `createPost` & `editPost` forms
-    - Display uploaded image in `PostCard` and blog detail page
+    - Cloudinary integration for image uploads
+    - Image upload field in `createPost` & `editPost` forms
+    - Display uploaded images in `PostCard` and blog detail page
+
+---
+
+**Comments** are managed via an API route (`/api/comments`).  
+The `CommentsSection` client component fetches and reloads comments after submission.  
+`CommentBox` calls the API and, on success, triggers `onCommentAdded()` to update comments.  
+Only logged-in users can comment (since `userId` is only available to authenticated users).

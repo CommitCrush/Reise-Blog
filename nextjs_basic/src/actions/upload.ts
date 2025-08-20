@@ -1,6 +1,7 @@
 "use server";
 
 import { writeFile } from "fs/promises";
+import path from "path";
 
 
 export async function uploadImage(formData: FormData) {

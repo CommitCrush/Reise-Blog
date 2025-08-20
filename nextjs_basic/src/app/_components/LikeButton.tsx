@@ -1,5 +1,4 @@
 "use client";
-import { toggleLike } from "@/actions/blog";
 import { useState } from "react";
 
 export default function LikeButton({
@@ -9,18 +8,23 @@ export default function LikeButton({
 }: {
   postId: string;
   userId: string;
-  initialLikes: string[];
+  initialLikes: any[];
 }) {
   const [likes, setLikes] = useState(initialLikes);
-  const liked = likes.includes(userId);
+  const liked = likes.some(
+    (like) =>
+      (typeof like === "object" && "username" in like && like._id === userId) ||
+      like === userId
+  );
 
   const handleLike = async () => {
-    await toggleLike(postId, userId);
-    if (liked) {
-      setLikes(likes.filter((id) => id !== userId));
-    } else {
-      setLikes([...likes, userId]);
-    }
+    const res = await fetch("/api/like", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId, userId }),
+    });
+    const data = await res.json();
+    if (data.likes) setLikes(data.likes);
   };
 
   return (
