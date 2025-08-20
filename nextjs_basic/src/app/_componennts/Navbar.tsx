@@ -8,7 +8,7 @@ export default async function Navbar() {
 	const user = await getSessionUser();
 	if (!user) return null;
 	return (
-		<nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-yellow-200 via-yellow-400 to-green-300 shadow-lg flex items-center justify-between px-8 py-4" style={{fontFamily: 'Montserrat, sans-serif'}}>
+		<nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-yellow-200 via-yellow-500 to-green-300 shadow-lg flex items-center justify-between px-8 py-4" style={{fontFamily: 'Montserrat, sans-serif'}}>
 			<div className="flex items-center gap-6">
 				<Link href="/" className="text-2xl font-bold text-yellow-700 hover:text-green-700 transition">ReiseBlog</Link>
 				<Link href="/" className="text-lg text-yellow-800 hover:text-green-700 transition">Home</Link>

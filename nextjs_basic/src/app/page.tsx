@@ -19,12 +19,14 @@ export default function Home() {
         <a
           href="/login"
           rel="noopener noreferrer"
+          className="mb-96"
         >
           
           Login
         </a>
-        <a href="/register" rel="noopener noreferrer">
+        <a href="/register" rel="noopener noreferrer" className="mb-96">
           Registriere dich hier →
+         
         </a>
       </footer>
     </div>

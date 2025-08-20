@@ -1,3 +1,4 @@
+
 import { getSessionUser } from "../../lib/auth";
 
 export default async function Footer() {
@@ -5,7 +6,7 @@ export default async function Footer() {
 	if (!user) return null;
 
 	return (
-		<footer className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-yellow-200 via-yellow-400 to-green-300 text-yellow-900 py-3 shadow-inner" style={{fontFamily: 'Montserrat, sans-serif'}}>
+		<footer className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-yellow-300 via-yellow-600 to-green-400 text-yellow-900 py-3 shadow-inner" style={{fontFamily: 'Montserrat, sans-serif'}}>
 			<div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 px-6">
 				<div className="text-center md:text-left">
 					<h3 className="text-xl font-bold mb-2">ReiseBlog</h3>
