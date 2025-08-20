@@ -18,7 +18,7 @@ export default function LikeButton({
   );
 
   const handleLike = async () => {
-    const res = await fetch("/api/like", {
+    const res = await fetch("/api/posts/like",  {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ postId, userId }),

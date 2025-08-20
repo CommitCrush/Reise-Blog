@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function CreateBlogPage() {
-  const [username, setUsername] = useState("");
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [city, setCity] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -49,10 +49,15 @@ export default function CreateBlogPage() {
       const res = await fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ author: { username }, content, imageUrl, city }),
+        body: JSON.stringify({ title, content, imageUrl, city }),
       });
-      if (!res.ok) throw new Error("Fehler beim Erstellen des Posts.");
-      setUsername("");
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Fehler beim Erstellen des Posts.");
+        setLoading(false);
+        return;
+      }
+      setTitle("");
       setContent("");
       setCity("");
       setImageFile(null);
@@ -118,8 +123,8 @@ export default function CreateBlogPage() {
         <input
           type="text"
           placeholder="Titel"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           required
           style={{
             width: "100%",

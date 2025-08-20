@@ -16,29 +16,43 @@ export async function createPost({
   title: string;
   content: string;
   imageUrl?: string;
-  city: string;
+  city?: string;
 }) {
   const user = await getSessionUser();
   if (!user) throw new Error("Nicht eingeloggt.");
   const author = user._id;
 
-  if (!title || !content || !city) {
-    throw new Error("Titel, Inhalt und Stadt sind erforderlich.");
+  if (!title || !content) {
+    throw new Error("Titel und Inhalt sind erforderlich.");
   }
 
   try {
     const post = new Post({ title, content, author, imageUrl, city });
     await post.save();
     return post;
+  } catch {
+    throw new Error("Post konnte nicht erstellt werden.");
+  }
 }
 
 // READ (alle): Alle Blog-Posts abrufen
 
 export async function getPosts() {
-  return await Post.find()
-    .populate("author", "username") // <--- Das ist wichtig!
+  const posts = await Post.find()
+    .populate("author", "username")
     .sort({ createdAt: -1 })
     .lean();
+
+  // Kommentare zählen (optional, falls du ein Comment-Modell hast)
+  // Hole alle Kommentare für alle Posts und zähle sie pro Post
+  const postIds = posts.map(post => post._id);
+  const comments = await Comment.find({ post: { $in: postIds } }).lean();
+
+  return posts.map(post => ({
+    ...post,
+    likeCount: post.likes ? post.likes.length : 0,
+    commentCount: comments.filter(c => c.post.toString() === post._id.toString()).length,
+  }));
 }
 
 // READ (einzelner): Einen Blog-Post anhand der ID abrufen
@@ -46,12 +60,12 @@ export async function getPosts() {
 export async function getPostById(id: string) {
   try {
     const post = await Post.findById(id)
-      .populate("author", "username") // Username des Autors
-      .populate("likes", "username")  // <--- Usernamen der Liker mitladen!
+      .populate("author", "username")
+      .populate("likes", "username") // <--- Füge das hinzu!
       .lean();
     if (!post) throw new Error("Post nicht gefunden.");
     return post;
-  } catch (error) {
+  } catch {
     throw new Error("Post konnte nicht geladen werden.");
   }
 }
@@ -72,7 +86,7 @@ export async function updatePost(
     }).lean();
     if (!updatedPost) throw new Error("Post nicht gefunden.");
     return updatedPost;
-  } catch (error) {
+  } catch {
     throw new Error("Post konnte nicht aktualisiert werden.");
   }
 }
@@ -86,7 +100,7 @@ export async function deletePost(id: string) {
     const deleted = await Post.findByIdAndDelete(id).lean();
     if (!deleted) throw new Error("Post nicht gefunden.");
     return deleted;
-  } catch (error) {
+  } catch {
     throw new Error("Post konnte nicht gelöscht werden.");
   }
 }
@@ -126,7 +140,7 @@ export async function addComment({
     const comment = new Comment({ post: postId, user: userId, text });
     await comment.save();
     return comment;
-  } catch (error) {
+  } catch {
     throw new Error("Kommentar konnte nicht gespeichert werden.");
   }
 }
@@ -139,7 +153,7 @@ export async function getComments(postId: string) {
       .populate("user", "username") // Username mitliefern!
       .lean();
     return comments;
-  } catch (error) {
+  } catch {
     throw new Error("Kommentare konnten nicht geladen werden.");
   }
 }
