@@ -51,32 +51,48 @@ export default function CreateBlogPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 500, margin: "2rem auto" }}>
-      <h2>Neuen Blog-Post erstellen</h2>
-      <input
-        type="text"
-        placeholder="Titel"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-        style={{ width: "100%", marginBottom: 8 }}
-      />
-      <textarea
-        placeholder="Inhalt"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        required
-        style={{ width: "100%", marginBottom: 8 }}
-      />
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      {preview && (
-        <div>
-          <img src={preview} alt="Vorschau" style={{ maxWidth: "100%", marginTop: 8 }} />
-        </div>
-      )}
-      <button type="submit" style={{ marginTop: 12 }} disabled={loading}>
-        {loading ? "Erstellen..." : "Erstellen"}
-      </button>
-          </form>
+    <main className="min-h-screen flex items-center justify-center bg-[#F1EBDD] px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-lg bg-[#E7E0C4] rounded-2xl shadow-2xl p-8 flex flex-col gap-6 "
+        style={{ fontFamily: 'Montserrat, sans-serif' }}
+      >
+        <h2 className="text-2xl font-bold text-[#445954] mb-2 text-center">Neuen Blog-Post erstellen</h2>
+        <input
+          type="text"
+          placeholder="Titel"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          className="border border-[#77B5A8] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6D8F7A] bg-[#6D8F7A]/10 text-[#445954] placeholder-[#77B5A8]"
+        />
+        <textarea
+          placeholder="Inhalt"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+          className="border border-[#77B5A8] rounded-lg px-4 py-2 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-[#6D8F7A] bg-[#6D8F7A]/10 text-[#445954] placeholder-[#77B5A8]"
+        />
+        <label className="text-[#227468] font-semibold">Bild hochladen:</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#77B5A8] file:text-white file:font-semibold file:hover:bg-[#227468] file:transition"
+        />
+        {preview && (
+          <div className="flex justify-center">
+            <img src={preview} alt="Vorschau" className="max-w-xs rounded-lg shadow-lg mt-2 border border-[#BDAC73]" />
+          </div>
+        )}
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-[#227468] text-white font-bold rounded-lg px-6 py-3 shadow hover:bg-[#445954] transition mt-2"
+        >
+          {loading ? "Erstellen..." : "Erstellen"}
+        </button>
+      </form>
+    </main>
   );
 }
