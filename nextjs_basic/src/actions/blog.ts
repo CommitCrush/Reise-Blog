@@ -47,6 +47,7 @@ export async function getPostById(id: string) {
   }
 
   try {
+    
     const post = await Post.findById(id).lean();
     if (!post) throw new Error("Post nicht gefunden.");
     return post;
