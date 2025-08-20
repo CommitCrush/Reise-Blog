@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose, { Mongoose, Schema, model } from 'mongoose';
 
 interface Database {
     connect: Mongoose | null;
@@ -45,4 +45,17 @@ export async function connectDB(): Promise<Mongoose> {
     throw new Error('❌ Mongoose connection failed');
   }
   return cachedPromise.connect;
+}
+
+// Define Blog schema and model (add this if not already present)
+const blogSchema = new Schema({
+  city: String,
+  // ...other fields...
+});
+const Blog = mongoose.models.Blog || model('Blog', blogSchema);
+
+// Update getBlogsByCity to use the Blog model
+export async function getBlogsByCity(city: string) {
+  await connectDB(); // Ensure DB is connected
+  return await Blog.find({ city: { $regex: city, $options: "i" } }).exec();
 }
