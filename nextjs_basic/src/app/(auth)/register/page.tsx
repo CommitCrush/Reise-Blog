@@ -12,9 +12,10 @@ export default function RegisterPage() {
   return (
   <main className="mx-auto h-screen flex items-center justify-center flex-col gap-5 bg-[#F1EBDD]">
   <h3 className="text-2xl font-bold text-[#445954] mb-2">Registrieren</h3>
+  <hr className="w-75 border- border-neutral-400 rounded mx-auto" />
       <form
         action={RegisterUser}
-        className="bg-[#E7E0C4] rounded-xl shadow-lg p-8 flex flex-col gap-6 min-w-[320px] border border-[#BDAC73]"
+        className="p-4 flex flex-col gap-6 min-w-[320px]"
         style={{fontFamily: 'Montserrat, sans-serif'}}
       >
         <div className="flex flex-col gap-2">
