@@ -11,10 +11,9 @@ const globalForMongoose = globalThis as unknown as { mongoose: Database };
 // Create a new connection
 const uri = process.env.MONGODB_URL as string;
 
-
 // Check if the URI is defined
 if (!uri) {
-    throw new Error('❌ MONGO_URL ist nicht definiert in .env.local');
+    console.warn('⚠️ MONGODB_URL is not defined in .env.local - database features will be disabled');
 }
 
 // If the connection is already established, return it
@@ -27,6 +26,10 @@ if (!globalForMongoose.mongoose) {
 
 // Function to connect to the database
 export async function connectDB(): Promise<Mongoose> {
+  if (!uri) {
+    throw new Error('Database not configured - MONGODB_URL is required');
+  }
+  
   if (cachedPromise.connect) return cachedPromise.connect;
 
   if (!cachedPromise.promise) {
