@@ -5,7 +5,7 @@ import Image from "next/image";
 // Dummy-Login-Status (ersetze das durch echten Auth-Status)
 const isLoggedIn = false;
 
-// Beispiel-Posts (nutze verschiedene Bilder aus public)
+// Beispiel-Posts (ersetzte das durch echte Daten aus deinem Backend)
 const posts = [
   {
     _id: "1",
@@ -39,31 +39,15 @@ const posts = [
     likes: [1, 2, 3],
     commentCount: 5,
   },
-  {
-    _id: "5",
-    title: "Sonnenuntergang in Chile",
-    imageUrl: "/Chile-Large.jpg",
-    author: { username: "Lena" },
-    likes: [2],
-    commentCount: 2,
-  },
-  {
-    _id: "6",
-    title: "Inspiration Collage",
-    imageUrl: "/Collage_HD+2022-10-27+21_16_00.webp",
-    author: { username: "Tom" },
-    likes: [],
-    commentCount: 1,
-  },
 ];
 
-// Mehr Bilder für die Slideshow
+// Bilder für die Slideshow
 const galleryImages = [
   "/Blog-voyage-corse-france-768x288.jpg",
   "/Chile-Large.jpg",
+  "/Collage_HD+2022-10-27+21_16_00.webp",
   "/Sehenswuerdigkeiten-Peru-Machu-Picchu-scaled.jpg",
   "/reise-blog-logo.png",
-  "/Collage_HD+2022-10-27+21_16_00.webp"
 ];
 
 export default function HomePage() {
@@ -84,15 +68,18 @@ export default function HomePage() {
   const handleShowAll = () => {
     if (!isLoggedIn) {
       alert("Bitte logge dich ein, um alle Beiträge zu sehen!");
+      // Optional: window.location.href = "/login";
       return;
     }
     setShowAll(true);
   };
 
+  // Handler für "Alle Beiträge lesen"
   const handleAllPosts = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isLoggedIn) {
       alert("Bitte logge dich ein, um alle Beiträge zu sehen!");
+      // Optional: window.location.href = "/login";
       return;
     }
     window.location.href = "/profile";
@@ -150,6 +137,7 @@ export default function HomePage() {
             <p className="text-lg md:text-2xl max-w-2xl mx-auto mb-8 text-gray-200">
               Abenteuer, Inspiration und praktische Tipps für deine nächste Reise.
             </p>
+            {/* Call to action Buttons */}
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="#kategorien"
@@ -168,31 +156,30 @@ export default function HomePage() {
         </section>
 
         {/* Über diese Seite */}
-        <section className="max-w-5xl mx-auto my-20 px-4 grid md:grid-cols-2 gap-12 items-center bg-white/95 rounded-2xl shadow-lg">
-          <img
-            src="/Collage_HD+2022-10-27+21_16_00.webp"
-            alt="Über diese Seite"
-            className="rounded-2xl shadow-lg object-cover w-full h-[400px]"
-          />
-          <div>
-            <h2 className="text-3xl font-bold text-[#2e7d32] mb-4">
-              Über diese Seite 🌍
-            </h2>
-            <p className="text-gray-700 mb-4 leading-relaxed">
-              Diese Seite ist eine Sammlung von Ideen, Tipps und Inspirationen
-              für alle, die die Welt entdecken möchten. Ob du von großen
-              Abenteuern träumst oder kleine Auszeiten im Alltag suchst – hier
-              findest du Anregungen, Geschichten und Ressourcen, die dich
-              weiterbringen.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Ziel dieser Seite ist es, Menschen zu motivieren, mit offenen
-              Augen zu reisen und neue Perspektiven zu entdecken.
-            </p>
-          </div>
-        </section>
+    <section className="max-w-5xl mx-auto my-20 px-4 grid md:grid-cols-2 gap-12 items-center bg-white/95 rounded-2xl shadow-lg">
+  <img
+    src="/Collage_HD+2022-10-27+21_16_00.webp"
+    alt="Über diese Seite"
+    className="rounded-2xl shadow-lg object-cover w-full h-[400px]"
+  />
+  <div>
+    <h2 className="text-3xl font-bold text-[#2e7d32] mb-4">
+      Über diese Seite 🌍
+    </h2>
+    <p className="text-gray-700 mb-4 leading-relaxed">
+      Diese Seite ist eine Sammlung von Ideen, Tipps und Inspirationen für
+      alle, die die Welt entdecken möchten. Ob du von großen Abenteuern
+      träumst oder kleine Auszeiten im Alltag suchst – hier findest du
+      Anregungen, Geschichten und Ressourcen, die dich weiterbringen.
+    </p>
+    <p className="text-gray-700 leading-relaxed">
+      Ziel dieser Seite ist es, Menschen zu motivieren, mit offenen Augen
+      zu reisen und neue Perspektiven zu entdecken.
+    </p>
+  </div>
+</section>
 
-        {/* Kategorien mit verschiedenen Bildern */}
+        {/* Kategorien */}
         <section id="kategorien" className="bg-gray-50 py-20">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-3xl font-bold text-center text-[#2e7d32] mb-12">
@@ -212,23 +199,8 @@ export default function HomePage() {
                 },
                 {
                   title: "Kultur erleben",
-                  img: "/Collage_HD+2022-10-27+21_16_00.webp",
-                  desc: "Traditionen, Menschen und neue Perspektiven kennenlernen.",
-                },
-                {
-                  title: "Frankreich entdecken",
-                  img: "/Blog-voyage-corse-france-768x288.jpg",
-                  desc: "Genieße die Vielfalt Frankreichs von Küste bis Alpen.",
-                },
-                {
-                  title: "Unser Logo",
                   img: "/reise-blog-logo.png",
-                  desc: "Das Symbol unserer Community.",
-                },
-                {
-                  title: "Sonnenuntergang",
-                  img: "/Chile-Large.jpg",
-                  desc: "Unvergessliche Momente in Südamerika.",
+                  desc: "Traditionen, Menschen und neue Perspektiven kennenlernen.",
                 },
               ].map((cat) => (
                 <div
@@ -254,9 +226,7 @@ export default function HomePage() {
 
         {/* Blog-Vorschau */}
         <section className="max-w-5xl mx-auto my-20 px-4">
-          <h2 className="text-2xl font-bold text-[#2e7d32] mb-6">
-            Neueste Blogposts
-          </h2>
+          <h2 className="text-2xl font-bold text-[#2e7d32] mb-6">Neueste Blogposts</h2>
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {visiblePosts.map((post) => (
               <li key={post._id} className="bg-white rounded-xl shadow-md p-5">
@@ -270,13 +240,13 @@ export default function HomePage() {
                   von: {post.author?.username || "Unbekannt"}
                 </div>
                 <div className="text-[#2e7d32] font-semibold text-sm mb-2">
-                  👍 {post.likes?.length || 0} &nbsp;|&nbsp; 💬{" "}
-                  {post.commentCount || 0}
+                  👍 {post.likes?.length || 0} &nbsp;|&nbsp; 💬 {post.commentCount || 0}
                 </div>
                 <button
                   onClick={() => {
                     if (!isLoggedIn) {
                       alert("Bitte logge dich ein, um den Beitrag zu sehen!");
+                      // Optional: window.location.href = "/login";
                       return;
                     }
                     window.location.href = `/blog/${post._id}`;

@@ -157,3 +157,19 @@ export async function getComments(postId: string) {
     throw new Error("Kommentare konnten nicht geladen werden.");
   }
 }
+
+
+
+// ...dein bisheriger Code...
+
+export async function getBlogsByCity(city: string) {
+  if (!city) return [];
+  // Suche nach Blogs, bei denen das Feld city (case-insensitive) passt
+  const blogs = await Post.find({
+    city: { $regex: new RegExp(city, "i") }
+  })
+    .populate("author", "username")
+    .sort({ createdAt: -1 })
+    .lean();
+  return blogs;
+}
