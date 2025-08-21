@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { getSessionUser } from "../../lib/auth";
 import LogoutButton from "./LogoutButton";
 
@@ -9,8 +10,17 @@ export default async function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#6D8F7A] via-[#227468] to-[#445954] shadow-lg flex items-center justify-between px-8 py-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
       <div className="flex items-center gap-6">
-        {/* Logo immer sichtbar */}
-        <Link href="/home" className="text-2xl font-bold text-[#F9E879] hover:text-[#BDAC73] transition">ReiseBlog</Link>
+        {/* Logo als Bild */}
+        <Link href="/home" className="flex items-center">
+          <Image
+            src="/reise-blog-logo.png"
+            alt="ReiseBlog Logo"
+            width={64} // größer!
+            height={64}
+            className="mr-4 rounded-full bg-white shadow-lg p-1 border-2 border-[#F9E879]"
+            priority
+          />
+        </Link>
         {/* Home immer sichtbar */}
         <Link href="/home" className="text-lg text-[#F9E879] hover:text-[#BDAC73] transition">Home</Link>
         {/* Diese Links nur wenn eingeloggt */}

@@ -302,19 +302,19 @@ export default function HomePage() {
         </section>
 
         {/* Zitat / Highlight */}
-        <section className="relative py-20 bg-gradient-to-r from-[#2e7d32]/90 via-[#4caf50]/70 to-[#b3ffab]/50">
+        <section className="relative py-20 pb-24 bg-gradient-to-r from-[#2e7d32]/90 via-[#4caf50]/70 to-[#b3ffab]/50">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <svg
-              className="mx-auto mb-6 w-12 h-12 text-white/70"
+              className="mx-auto mb-6 w-10 h-10 text-white/70"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
               <path d="M7.17 6A5 5 0 0 1 12 2a5 5 0 0 1 4.83 4h-3.66a2 2 0 0 0-2 2v3.66a5 5 0 0 1-4-3.66zM16.83 18A5 5 0 0 1 12 22a5 5 0 0 1-4.83-4h3.66a2 2 0 0 0 2-2v-3.66a5 5 0 0 1 4 3.66z" />
             </svg>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-relaxed drop-shadow-md">
+            <h2 className="text-lg md:text-xl font-bold text-white mb-4 leading-relaxed drop-shadow-md">
               „Reisen ist das Einzige, was du kaufen kannst, das dich reicher macht.“
             </h2>
-            <p className="text-lg text-white/80 italic">– Unbekannt</p>
+            <p className="text-base text-white/80 italic">– Unbekannt</p>
           </div>
         </section>
       </div>
